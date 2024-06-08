@@ -4,6 +4,8 @@ import App from "./App.tsx";
 import "./index.css";
 import { BrowserRouter } from "react-router-dom";
 import { ThemeProvider, createTheme } from "@mui/material";
+import { QuizContextProvider } from "./context/QuizContext.tsx";
+import { QuizStore } from "./store/quiz.store.ts";
 
 const theme = createTheme({
   typography: {
@@ -11,11 +13,16 @@ const theme = createTheme({
   },
 });
 
+const quizStore = new QuizStore()
+
+
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <BrowserRouter>
       <ThemeProvider theme={theme}>
-        <App />
+        <QuizContextProvider store={quizStore}>
+          <App />
+        </QuizContextProvider>
       </ThemeProvider>
     </BrowserRouter>
   </React.StrictMode>

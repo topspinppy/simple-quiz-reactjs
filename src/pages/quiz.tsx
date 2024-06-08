@@ -33,9 +33,15 @@ function QuizPage() {
             </Typography>
           </Box>
           <Box>
-            {rawQuestion[questionIndex].options.map((option) => {
+            {rawQuestion[questionIndex].options.map((option, index) => {
               return (
-                <Button variant="outlined" fullWidth sx={{ mb: 1}} size="large">
+                <Button
+                  variant="outlined"
+                  fullWidth
+                  sx={{ mb: 1 }}
+                  size="large"
+                  key={index}
+                >
                   {option}
                 </Button>
               );
