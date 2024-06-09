@@ -4,7 +4,7 @@ import { observer } from "mobx-react-lite";
 interface IAnswerButtonSetProps {
   options: string[];
   onClick(answer: string, index: number): void;
-  successAnswer: boolean[][];
+  successAnswer: (boolean | string)[][];
   questionIndex: number;
 }
 
@@ -14,7 +14,6 @@ function AnswerButtonSet(props: IAnswerButtonSetProps) {
   return (
     <>
       {options.map((option, index) => {
-        console.log(successAnswer[questionIndex]);
         return (
           <Button
             variant="outlined"

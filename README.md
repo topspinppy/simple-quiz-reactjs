@@ -1,30 +1,37 @@
-# React + TypeScript + Vite
+# Simple Quiz Project
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Introduction
+This project utilizes React.js to develop an application with state management handled by MobX.js in conjunction with React Hooks.
 
-Currently, two official plugins are available:
+## Installation
+To get started with this project, you need to have Node.js and bun installed on your machine.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+1. Clone this repository to your machine.
+2. Open Terminal and navigate to the project directory.
+3. Run `bun install` to install dependencies.
 
-## Expanding the ESLint configuration
+## Usage
+Start the project with the command:
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+This will launch the application in development mode and open a browser at [http://localhost:5173](http://localhost:5173).
 
-- Configure the top-level `parserOptions` property like this:
+## File Structure
+This project consists of the following files/folders:
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+- `src/`: Main folder of the project
+  - `components/`: Folder containing React components
+  - `store/`: Folder containing MobX stores
+  - `App.tsx`: Main file of the application
+  - `context/`: Use A context hooks for connect with store folder
+  - `pages/`: All page in this project
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## Architecture
+
+
+## State Management
+This project uses MobX.js for state management, utilizing React Hooks to connect React components with MobX stores.
+
+## Created by
+Author: Topz
+
+

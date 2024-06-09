@@ -8,7 +8,7 @@ export type HallOfFame = {
 export class QuizStore {
   private _temporaryName = "";
   private _question: IQuestion[] = [];
-  private _correctAnswer: boolean[][] = [[]];
+  private _correctAnswer: (boolean | string)[][] = [[]];
   private _questionIndex: number = 0;
   private _score: number = 0;
   private _isQuizEnd: boolean = false;

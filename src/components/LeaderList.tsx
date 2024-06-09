@@ -14,31 +14,39 @@ interface ILeaderListProps {
 export default function LeaderList(props: ILeaderListProps) {
   const { lists } = props;
   return (
-    <List sx={{ width: "100%", bgcolor: "background.paper", mt: "2rem" }}>
-      {lists.map((list, index) => {
-        return (
-          <ListItem alignItems="flex-start" key={index}>
-            <ListItemAvatar>
-              <Avatar alt={`${index}`} src="/static/images/avatar/1.jpg" />
-            </ListItemAvatar>
-            <ListItemText
-              primary={list.name}
-              secondary={
-                <React.Fragment>
-                  <Typography
-                    sx={{ display: "inline" }}
-                    component="span"
-                    variant="body2"
-                    color="text.primary"
-                  >
-                    Score: {list.score}
-                  </Typography>
-                </React.Fragment>
-              }
-            />
-          </ListItem>
-        );
-      })}
-    </List>
+    <>
+      {lists.length !== 0 && (
+        <List sx={{ width: "100%", bgcolor: "background.paper", mt: "2rem" }}>
+          {lists.map((list, index) => {
+            console.log;
+            return (
+              <ListItem alignItems="flex-start" key={index}>
+                <ListItemAvatar>
+                  <Avatar
+                    alt={`${index + 1}`}
+                    src="/static/images/avatar/1.jpg"
+                  />
+                </ListItemAvatar>
+                <ListItemText
+                  primary={list.name}
+                  secondary={
+                    <React.Fragment>
+                      <Typography
+                        sx={{ display: "inline" }}
+                        component="span"
+                        variant="body2"
+                        color="text.primary"
+                      >
+                        Score: {list.score}
+                      </Typography>
+                    </React.Fragment>
+                  }
+                />
+              </ListItem>
+            );
+          })}
+        </List>
+      )}
+    </>
   );
 }
