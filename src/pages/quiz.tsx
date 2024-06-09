@@ -1,10 +1,28 @@
-import { Box, Typography, Button } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { useQuizContext } from "../context/QuizContext";
+import AnswerButtonSet from "../components/AnswerButton";
+import { observer } from "mobx-react-lite";
+import { toJS } from "mobx";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 function QuizPage() {
   const context = useQuizContext();
-  const { question: rawQuestion, questionIndex } = context.store;
+  const navigate = useNavigate();
 
+  const {
+    question: rawQuestion,
+    questionIndex,
+    handleCheckAnswer,
+    isQuizEnd,
+  } = context.store;
+
+  useEffect(() => {
+    if (isQuizEnd) {
+      navigate("/result");
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isQuizEnd]);
   return (
     <>
       <Box
@@ -21,36 +39,34 @@ function QuizPage() {
           borderRadius="1rem"
           padding={5}
         >
-          <Box
-            display="flex"
-            justifyContent="center"
-            flexDirection="column"
-            alignItems={"center"}
-            mb="2rem"
-          >
-            <Typography variant="h6">
-              {rawQuestion[questionIndex].question}
-            </Typography>
-          </Box>
-          <Box>
-            {rawQuestion[questionIndex].options.map((option, index) => {
-              return (
-                <Button
-                  variant="outlined"
-                  fullWidth
-                  sx={{ mb: 1 }}
-                  size="large"
-                  key={index}
-                >
-                  {option}
-                </Button>
-              );
-            })}
-          </Box>
+          {!isQuizEnd && (
+            <>
+              <Box
+                display="flex"
+                justifyContent="center"
+                flexDirection="column"
+                alignItems={"center"}
+                mb="2rem"
+              >
+                <Typography variant="h6">
+                  {rawQuestion[questionIndex]?.question}
+                </Typography>
+              </Box>
+              <Box>
+                <AnswerButtonSet
+                  options={rawQuestion[questionIndex]?.options ?? []}
+                  onClick={(value) => {
+                    handleCheckAnswer(value);
+                  }}
+                />
+              </Box>
+            </>
+          )}
         </Box>
       </Box>
     </>
   );
 }
 
-export default QuizPage;
+// eslint-disable-next-line react-refresh/only-export-components
+export default observer(QuizPage);

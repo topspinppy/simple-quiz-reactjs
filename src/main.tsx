@@ -13,14 +13,13 @@ const theme = createTheme({
   },
 });
 
-const quizStore = new QuizStore()
 
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <BrowserRouter>
       <ThemeProvider theme={theme}>
-        <QuizContextProvider store={quizStore}>
+        <QuizContextProvider store={new QuizStore()}>
           <App />
         </QuizContextProvider>
       </ThemeProvider>

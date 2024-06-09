@@ -1,8 +1,9 @@
+/* eslint-disable react-refresh/only-export-components */
 import { Box, TextField, Typography } from "@mui/material";
-import { observer } from "mobx-react-lite";
 import { useQuizContext } from "../context/QuizContext";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { observer } from "mobx-react-lite";
 
 function HomePage() {
   const context = useQuizContext();
@@ -32,8 +33,8 @@ function HomePage() {
             alignItems={"center"}
             mb="2rem"
           >
-            <Typography variant="h4">Basic Quiz</Typography>
-            <Typography variant="h4">คำถามง่ายๆ</Typography>
+            <Typography variant="h4" fontWeight="800">Basic Quiz</Typography>
+            <Typography variant="h4" fontWeight="200">คำถามง่ายๆ ง่ายจริงจริ๊งง</Typography>
           </Box>
           <Box>
             <TextField
@@ -57,4 +58,4 @@ function HomePage() {
   );
 }
 
-export default HomePage;
+export default observer(HomePage);
