@@ -9,7 +9,7 @@ function HallOfFame(props: IHallOfFameProps) {
   const { leader } = props;
   return (
     <Grid container spacing={0}>
-      <Grid xs display="flex" alignItems="center" flexDirection="column">
+      <Grid item xs display="flex" alignItems="center" flexDirection="column">
         <Box height="2rem" />
         {leader[1] && (
           <>
@@ -35,7 +35,7 @@ function HallOfFame(props: IHallOfFameProps) {
           </>
         )}
       </Grid>
-      <Grid xs={6} display="flex" alignItems="center" flexDirection="column">
+      <Grid item xs={6} display="flex" alignItems="center" flexDirection="column">
         {leader[0] && (
           <>
             <Box>
@@ -62,7 +62,7 @@ function HallOfFame(props: IHallOfFameProps) {
           </>
         )}
       </Grid>
-      <Grid xs display="flex" alignItems="center" flexDirection={"column"}>
+      <Grid item xs display="flex" alignItems="center" flexDirection={"column"}>
         <Box height="2rem" />
         {leader[2] && (
           <>

@@ -17,9 +17,9 @@ export default function LeaderList(props: ILeaderListProps) {
     <List sx={{ width: "100%", bgcolor: "background.paper", mt: "2rem" }}>
       {lists.map((list, index) => {
         return (
-          <ListItem alignItems="flex-start">
+          <ListItem alignItems="flex-start" key={index}>
             <ListItemAvatar>
-              <Avatar alt={`${index + 4}`} src="/static/images/avatar/1.jpg" />
+              <Avatar alt={`${index}`} src="/static/images/avatar/1.jpg" />
             </ListItemAvatar>
             <ListItemText
               primary={list.name}

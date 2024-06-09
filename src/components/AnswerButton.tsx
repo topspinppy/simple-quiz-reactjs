@@ -1,15 +1,20 @@
 import { Button } from "@mui/material";
+import { observer } from "mobx-react-lite";
 
 interface IAnswerButtonSetProps {
   options: string[];
-  onClick(answer: string): void;
+  onClick(answer: string, index: number): void;
+  successAnswer: boolean[][];
+  questionIndex: number;
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 function AnswerButtonSet(props: IAnswerButtonSetProps) {
-  const { options, onClick } = props;
+  const { options, onClick, successAnswer, questionIndex } = props;
   return (
     <>
       {options.map((option, index) => {
+        console.log(successAnswer[questionIndex]);
         return (
           <Button
             variant="outlined"
@@ -17,8 +22,12 @@ function AnswerButtonSet(props: IAnswerButtonSetProps) {
             sx={{ mb: 1 }}
             size="large"
             key={index}
+            {...(typeof successAnswer[questionIndex][index] !== "string" &&
+              Boolean(successAnswer[questionIndex][index]) === false && {
+                color: "error",
+              })}
             onClick={() => {
-              onClick(option)
+              onClick(option, index);
             }}
           >
             {option}
@@ -29,4 +38,4 @@ function AnswerButtonSet(props: IAnswerButtonSetProps) {
   );
 }
 
-export default AnswerButtonSet;
+export default observer(AnswerButtonSet);

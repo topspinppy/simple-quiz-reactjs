@@ -2,9 +2,9 @@ import { Box, Typography } from "@mui/material";
 import { useQuizContext } from "../context/QuizContext";
 import AnswerButtonSet from "../components/AnswerButton";
 import { observer } from "mobx-react-lite";
-import { toJS } from "mobx";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { toJS } from "mobx";
 
 function QuizPage() {
   const context = useQuizContext();
@@ -13,6 +13,7 @@ function QuizPage() {
   const {
     question: rawQuestion,
     questionIndex,
+    correctAnswer,
     handleCheckAnswer,
     isQuizEnd,
   } = context.store;
@@ -23,6 +24,7 @@ function QuizPage() {
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isQuizEnd]);
+
   return (
     <>
       <Box
@@ -41,6 +43,7 @@ function QuizPage() {
         >
           {!isQuizEnd && (
             <>
+              {questionIndex + 1 + `/` +rawQuestion.length}
               <Box
                 display="flex"
                 justifyContent="center"
@@ -54,9 +57,11 @@ function QuizPage() {
               </Box>
               <Box>
                 <AnswerButtonSet
+                  questionIndex={questionIndex}
+                  successAnswer={toJS(correctAnswer)}
                   options={rawQuestion[questionIndex]?.options ?? []}
-                  onClick={(value) => {
-                    handleCheckAnswer(value);
+                  onClick={(value, index) => {
+                    handleCheckAnswer(value, index);
                   }}
                 />
               </Box>

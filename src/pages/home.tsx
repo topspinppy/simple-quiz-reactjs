@@ -9,7 +9,7 @@ function HomePage() {
   const context = useQuizContext();
   const [name, setName] = useState<string>('');
   const navigate = useNavigate()
-
+  const [error, setError] = useState<boolean>(false);
   return (
     <>
       <Box
@@ -41,13 +41,25 @@ function HomePage() {
               fullWidth
               label="กรุณากรอกชื่อของคุณและกด Enter"
               value={name}
+              error={error}
+              helperText={error ? 'กรอกชื่อของคุณเพื่อไปต่อ!' : ''}
               onChange={(e) => {
                 setName(e.target.value);
+                if (e.target.value !== '') {
+                  setError(false)
+                } else {
+                  setError(true)
+                }
               }}
               onKeyDown={(e) => {
                 if (e.key === "Enter") {
-                  context.store.handleSetTemporaryName(name)
-                  navigate('/quiz')
+                  const status = context.store.handleSetTemporaryName(name)
+                  if (status !== 'empty') {
+                    setError(false)
+                    navigate('/quiz')
+                  } else {
+                    setError(true);
+                  }
                 }
               }}
             />

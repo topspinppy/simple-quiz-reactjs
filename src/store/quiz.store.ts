@@ -8,6 +8,7 @@ export type HallOfFame = {
 export class QuizStore {
   private _temporaryName = "";
   private _question: IQuestion[] = [];
+  private _correctAnswer: boolean[][] = [[]];
   private _questionIndex: number = 0;
   private _score: number = 0;
   private _isQuizEnd: boolean = false;
@@ -19,6 +20,10 @@ export class QuizStore {
 
   get temporaryName() {
     return toJS(this._temporaryName);
+  }
+
+  get correctAnswer() {
+    return this._correctAnswer;
   }
 
   get question() {
@@ -46,6 +51,8 @@ export class QuizStore {
         array[currentIndex],
       ];
     }
+    const initialCorrectAnswer = array.map(() => ["", "", "", ""]);
+    this._correctAnswer = initialCorrectAnswer;
     return array;
   }
 
@@ -57,16 +64,13 @@ export class QuizStore {
     const score = this._score;
     const name = this.temporaryName;
 
-    // Check if there's data in localStorage
-    const hallOfFame = JSON.parse(localStorage.getItem("leader") || '[]');
+    const hallOfFame = JSON.parse(localStorage.getItem("leader") || "[]");
 
-    // Ensure hallOfFame is an array
     if (!Array.isArray(hallOfFame)) {
       console.error("Data in localStorage is not in the expected format.");
       return;
     }
 
-    // Add new entry to hallOfFame
     const tempHallOfFame = [
       ...hallOfFame,
       {
@@ -77,15 +81,18 @@ export class QuizStore {
     localStorage.setItem("leader", JSON.stringify(tempHallOfFame));
   }
 
-  handleCheckAnswer = (currentAnswer: string) => {
+  handleCheckAnswer = (currentAnswer: string, index: number) => {
     const correctAnswer = this._question[this._questionIndex].answer;
-
     runInAction(() => {
       if (correctAnswer === currentAnswer) {
+        this._correctAnswer[this.questionIndex][index] = true;
         this.handleAddScore();
         this.handleNextQuestion();
       } else {
-        this.handleNextQuestion();
+        this._correctAnswer[this.questionIndex][index] = false;
+        setTimeout(() => {
+          this.handleNextQuestion();
+        }, 1000);
       }
     });
   };
@@ -105,6 +112,9 @@ export class QuizStore {
   };
 
   handleSetTemporaryName(name: string) {
+    if (name === "") {
+      return "empty";
+    }
     this.resetQuiz();
     this._temporaryName = name;
     localStorage.setItem("currentName", name);
