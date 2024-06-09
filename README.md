@@ -1,7 +1,12 @@
 # Simple Quiz Project
 
+
 ## Introduction
 This project utilizes React.js to develop an application with state management handled by MobX.js in conjunction with React Hooks.
+
+## Architecture
+![image](https://github.com/topspinppy/simple-quiz-reactjs/assets/18381211/2adf8512-ec45-447b-9ea1-5e1e902ada0a)
+
 
 ## Installation
 To get started with this project, you need to have Node.js and bun installed on your machine.
@@ -25,7 +30,6 @@ This project consists of the following files/folders:
   - `context/`: Use A context hooks for connect with store folder
   - `pages/`: All page in this project
 
-## Architecture
 
 
 ## State Management
